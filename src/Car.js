@@ -12,8 +12,6 @@ export function Car() {
     )
 
     useEffect(() => {
-
-        //gltf.scene.scale.set(0.005, 0.005, 0.005);
         gltf.scene.scale.set(1.5, 1.5, 1.5);
         gltf.scene.position.set(0, 0, 0);
         gltf.scene.traverse((object) => {
