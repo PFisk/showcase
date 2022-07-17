@@ -1,14 +1,18 @@
-import { MeshReflectorMaterial } from "@react-three/drei/core";
 import { useFrame, useLoader } from "@react-three/fiber";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { LinearEncoding, RepeatWrapping, TextureLoader } from "three";
 
 export function Ground() {
 
-    const [roughness, normal] = useLoader(TextureLoader,  [
+    const [roughness, normal, alpha] = useLoader(TextureLoader, [
         process.env.PUBLIC_URL + "textures/asphalt-roughness.jpg",
         process.env.PUBLIC_URL + "textures/asphalt-normal.jpg",
+        process.env.PUBLIC_URL + "textures/asphalt-alpha-inv-clean.png",
     ]);
+
+    console.log("alpha", alpha)
+    console.log("normal", normal)
+    console.log("roughness", roughness)
 
     useEffect(() => {
         [normal, roughness].forEach((t) => {
@@ -21,46 +25,35 @@ export function Ground() {
         roughness.encoding = LinearEncoding;
     }, [normal, roughness])
 
-    useFrame((state, delta) => {
-        let t = -state.clock.getElapsedTime() * 0.256;
+    useFrame(({ clock }) => {
+        const t = -clock.getElapsedTime() * 0.256;
         roughness.offset.set(0, t);
         normal.offset.set(0, t);
     })
 
     return (
-        <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
-            <circleGeometry 
-                args={[10, 100]} 
-            />
-            <meshStandardMaterial 
-                envMapIntensity={0}
-                normalMap={normal}
-                normalScale={[0.15, 0.15]}
-                roughness={1}
-                roughnessMap={roughness}
-                color={[0.1, 0.1, 0.1]}
-            />
-{/*             <MeshReflectorMaterial 
-                envMapIntensity={0}
-                normalMap={normal}
-                normalScale={[0.15, 0.15]}
-                roughnessMap={roughness}
-                dithering={true}
-                color={[0.015, 0.015, 0.015]}
-                roughness={1}
-                blur={[1000, 400]}
-                mixBlur={50}
-                mixStrength={3}
-                mixContrast={1}
-                resolution={1024}
-                mirror={0}
-                depthScale={0.01}
-                minDepthThreshold={0.9}
-                maxDepthThreshold={1}
-                depthToBlurRatioBias={0.25}
-                debug={0}
-                reflectorOffset={0.2}
-            /> */}
-        </mesh>
+        <>
+            <mesh rotation-x={-Math.PI * 0.5} castShadow receiveShadow>
+                <circleGeometry
+                    args={[7, 100]} />
+                <meshStandardMaterial
+                    envMapIntensity={0}
+                    transparent={true}
+                    normalMap={normal}
+                    normalScale={[1, 1]}
+                    roughnessMap={roughness}
+                    roughness={1}
+                    color={[0.01, 0.01, 0.01]} />
+            </mesh>
+            <mesh rotation-x={-Math.PI * 0.5} position={[0, 0.01, 0]}>
+                <circleGeometry
+                    args={[8, 100]} />
+                <meshStandardMaterial
+                    envMapIntensity={0}
+                    alphaMap={alpha}
+                    transparent={true}
+                    color={[0.01, 0.01, 0.01]}/>
+            </mesh>
+        </>
     );
 }

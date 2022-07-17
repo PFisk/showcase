@@ -11,7 +11,8 @@ function CarShow() {
       <OrbitControls target={[0, 0.35, 0]} maxPolarAngle={1.45} />
       <PerspectiveCamera makeDefault fov={50} position={[3, 2, 5]} />
 
-      <color args={[70, 70, 70]} attach="background" />
+      <color args={[1, 1, 1]} attach="background" />
+      {/* <fog attach="fog" args={["white", 6, 20]} /> */}
 
       <Car />
 
@@ -38,12 +39,11 @@ function CarShow() {
         intensity={2}
         angle={0.6}
         penumbra={0.5}
-        position={[0, 5, 0]}
+        position={[0, 10, 0]}
         castShadow shadow-bias={-0.0001}
       />
 
-{/*       <ambientLight intensity={0.5} /> */}
-{/*       <fog attach="fog" args={["white", 0, 50]} /> */}
+      <ambientLight intensity={0.6} />
 
       <Ground />
     </>
@@ -52,11 +52,14 @@ function CarShow() {
 
 function App() {
   return (
+    <div>
+      <span class="header">Showcase</span>
     <Suspense fallback={null}>
       <Canvas shadows>
         <CarShow />
       </Canvas>
     </Suspense>
+    </div>
   )
 }
 
