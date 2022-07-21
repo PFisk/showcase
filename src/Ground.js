@@ -10,10 +10,6 @@ export function Ground() {
         process.env.PUBLIC_URL + "textures/alpha-10.png",
     ]);
 
-    console.log("alpha", alpha)
-    console.log("normal", normal)
-    console.log("roughness", roughness)
-
     useEffect(() => {
         [normal, roughness].forEach((t) => {
             t.wrapS = RepeatWrapping;
