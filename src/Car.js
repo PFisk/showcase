@@ -11,8 +11,6 @@ export function Car(props) {
         process.env.PUBLIC_URL + props.model
     )
 
-    console.log("gltf", gltf)
-
     useEffect(() => {
         gltf.scene.scale.set(props.scale, props.scale, props.scale);
         gltf.scene.position.set(0, 0, 0);
@@ -25,32 +23,18 @@ export function Car(props) {
         });
     }, [gltf, props.scale]);
 
+    console.log("gltf", gltf.scene.children[0].children[0])
+
     useFrame((state, delta) => {
         let t = state.clock.getElapsedTime();
 
-/*         let group = gltf.scene.children[0].children[0]
-               
-        //front right wheel
-        group.children[12].rotation.x = t * 2;
+        let group = gltf.scene.children[0].children[0];
 
-        //front left wheel
-        group.children[10].rotation.x = t * 2;
-
-        //back left wheel
-        group.children[11].rotation.x = t * 2;
-
-        //back right wheel
-        group.children[13].rotation.x = t * 2 */
-
-
-        //bimmer wheels
-        let group = gltf.scene.children[0].children[0]
-               
-        //back left wheel
-        group.children[22].rotation.x = t * 2;
-        group.children[23].rotation.x = t * 2;
-        group.children[24].rotation.x = t * 2;
-        group.children[25].rotation.x = t * 2
+        //Rotate wheels
+        group.children[group.children.findIndex(c => c.name === props.wheels[0])].rotation.x = t * 2;
+        group.children[group.children.findIndex(c => c.name === props.wheels[1])].rotation.x = t * 2;
+        group.children[group.children.findIndex(c => c.name === props.wheels[2])].rotation.x = t * 2;
+        group.children[group.children.findIndex(c => c.name === props.wheels[3])].rotation.x = t * 2;
 
     })
 
