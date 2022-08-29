@@ -49,6 +49,15 @@ export const CarShow = (props) => {
           position={[0, 0.5, -8]}
           castShadow shadow-bias={-0.0001}
         />
+
+        <spotLight
+          color={[1, 1, 1]}
+          intensity={0.2}
+          angle={0.7}
+          penumbra={0.5}
+          position={[0, 0.7, 8]}
+          castShadow shadow-bias={-0.0001}
+        />
   
         <ambientLight intensity={0.6} />
   
