@@ -1,23 +1,30 @@
 import React from "react";
+import ProgressBar from "./ProgressBar";
 
 const InfoBox = (props) => {
 
+    const max = 20;
+    const stepDivider = 5;
+
     return (
-        <div class="flex items-center flex-col border-2 p-6">
-            <h2 class="text-2xl font-bold pb-4">{props.carName}</h2>
-            <div class="flex items-start flex-col w-1/4">
-                <div class="flex justify-between w-full">
-                    <span> Speed:</span> <div class="text-blue-600 font-bold">{props.speed}</div>
+        <div className="flex items-center flex-col border-4 border-slate-300 bg-blue-50 rounded-md p-10">
+            <div className="flex items-start flex-col">
+                <div className="flex justify-between w-full">
+                    <span className="font-bold"> Speed:</span> <div className="text-teal-500 font-bold text-xl">{props.speed}</div>
                 </div>
-                <div class="flex justify-between w-full">
-                    <span> Handling:</span> <div class="text-blue-600 font-bold">{props.handling}</div>
+                <ProgressBar max={max} state={props.speed/stepDivider}/>
+                <div className="flex justify-between w-full pt-2">
+                    <span className="font-bold"> Handling:</span> <div className="text-teal-500 font-bold text-xl">{props.handling}</div>
                 </div>
-                <div class="flex justify-between w-full">
-                    <span> Acceleration:</span> <div class="text-blue-600 font-bold">{props.acceleration}</div>
+                <ProgressBar max={max} state={props.handling/stepDivider}/>
+                <div className="flex justify-between w-full pt-2">
+                    <span className="font-bold"> Acceleration:</span> <div className="text-teal-500 font-bold text-xl">{props.acceleration}</div>
                 </div>
-                <div class="flex justify-between w-full">
-                    <span> Style:</span> <div class="text-blue-600 font-bold">{props.style}</div>
+                <ProgressBar max={max} state={props.acceleration/stepDivider}/>
+                <div className="flex justify-between w-full pt-2">
+                    <span className="font-bold"> Style:</span> <div className="text-teal-500 font-bold text-xl">{props.style}</div>
                 </div>
+                <ProgressBar max={max} state={props.style/stepDivider}/>
             </div>
         </div>
     )
