@@ -23,7 +23,8 @@ export function Car(props) {
         });
     }, [gltf, props.scale]);
 
-    console.log("gltf", gltf.scene.children[0].children[0])
+    console.log("gltf test", gltf.scene)
+    console.log("gltf", gltf.scene.children[0])
 
     useFrame((state, delta) => {
         let t = state.clock.getElapsedTime();
