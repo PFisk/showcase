@@ -17,6 +17,16 @@ function App() {
     acceleration: 45,
     style: 80
   }
+  const porsche930 = {
+    model: "models/porsche930/scene.gltf",
+    scale: 2,
+    wheels: ["Back_left_wheel", "Back_right_wheel", "Front_left_wheel", "Front_right_wheel"],
+    carName: "Porsche 930",
+    speed: 80,
+    handling: 30,
+    acceleration: 25,
+    style: 90
+  }
   const nissan = {
     model: "models/car3/scene.gltf",
     scale: 2,
@@ -27,13 +37,8 @@ function App() {
     acceleration: 65,
     style: 50
   }
-  /*   const porsche = {
-      model: "models/porsche/scene.gltf",
-      scale: 0.5,
-      wheels: [23, 24, 25, 26]
-    } */
 
-  const carDataLocal = [bimmer, nissan]
+  const carDataLocal = [bimmer, porsche930, nissan]
 
   const [carData, setCarData] = useState(carDataLocal);
   const [currentCar, setCurrentCar] = useState(carDataLocal[0]);
@@ -55,10 +60,10 @@ function App() {
 
   return (
     <div>
-      <div>
-        <h2 className="flex flex-col items-center text-4xl font-bold pb-4">{currentCar.carName}</h2>
+      <div className="absolute z-30 justify-center flex top-0 text-6xl font-bold w-full pt-10">
+        <h2>{currentCar.carName}</h2>
       </div>
-      <div className="absolute z-20 bottom-0 top-0 left-0 right-0 w-1/5 h-1/4">
+      <div className="absolute z-20 bottom-0 top-1/2 left-0 right-0 w-1/5 h-1/4">
       <InfoBox
         carName={currentCar.carName}
         speed={currentCar.speed}
